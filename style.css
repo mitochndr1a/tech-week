@@ -21,6 +21,10 @@
 
 * { box-sizing: border-box; }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   margin: 0;
   background: var(--bg);
@@ -215,7 +219,7 @@ button, select, input { font-family: inherit; }
 .hero-wave {
   position: absolute;
   left: 0;
-  bottom: -50px;
+  bottom: 0px;
   width: 100%;
   z-index: 2;
   opacity: 0.95;
