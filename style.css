@@ -528,7 +528,7 @@ button, select, input { font-family: inherit; }
 
 /* Animated light sweep across every Tech Week title. */
 .title-glow {
-  background-image: url("images/tech-week-title.png");
+  background-image: url("tech-week-title.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -555,8 +555,8 @@ button, select, input { font-family: inherit; }
   background-size: 260% 100%;
   background-position: 160% 0;
   mix-blend-mode: screen;
-  -webkit-mask: url("images/tech-week-title.png") center / contain no-repeat;
-  mask: url("images/tech-week-title.png") center / contain no-repeat;
+  -webkit-mask: url("tech-week-title.png") center / contain no-repeat;
+  mask: url("tech-week-title.png") center / contain no-repeat;
   animation: title-light-sweep 3.8s ease-in-out infinite;
   pointer-events: none;
 }
