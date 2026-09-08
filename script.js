@@ -2,27 +2,43 @@
 // Tech Week 2026 — landing page behaviour
 // ============================================================
 
-// ---- Scale the fixed 1600px-wide "stage" to fit the viewport ----
-// The whole page is authored at a fixed 1600×900-per-section canvas
-// (matching the design mockups exactly) and then scaled uniformly,
-// the same way a slide deck fits a screen. This keeps every element
-// exactly where it was designed, at any window size.
 const stage = document.getElementById("stage");
 const stageOuter = document.querySelector(".stage-outer");
 const globalHeader = document.querySelector(".global-header-wrap");
 
 function fitStage() {
+  const isMobile = window.innerWidth <= 900;
+
+  if (isMobile) {
+    stage.style.transform = "none";
+    stage.style.width = "100%";
+    stageOuter.style.height = "auto";
+
+    if (globalHeader) {
+      globalHeader.style.transform = "none";
+      globalHeader.style.width = "100%";
+    }
+
+    return;
+  }
+
   const scale = window.innerWidth / 1600;
+
   stage.style.transform = `scale(${scale})`;
-  if (globalHeader) globalHeader.style.transform = `scale(${scale})`;
+
+  if (globalHeader) {
+    globalHeader.style.transform = `scale(${scale})`;
+    globalHeader.style.width = "1600px";
+  }
+
   stageOuter.style.height = `${stage.offsetHeight * scale}px`;
 }
 window.addEventListener("resize", fitStage);
 fitStage();
-// Re-measure once images/fonts have settled in (natural height can shift slightly).
+
 window.addEventListener("load", fitStage);
 
-// ---- Animated mascot (Lottie), loaded from a locally bundled copy ----
+
 function loadRobot(containerId) {
   const el = document.getElementById(containerId);
   if (!el || typeof lottie === "undefined") return null;
@@ -43,9 +59,7 @@ function loadRobot(containerId) {
 
 loadRobot("robot-lottie");
 
-// ---- Robot reacts to the cursor: a gentle parallax tilt/float ----
-// Each robot drifts a little toward the pointer and tilts slightly,
-// easing back to center when the pointer leaves.
+
 function makeCursorReactive(el, strength = 18) {
   if (!el) return;
   let raf = null;
@@ -76,7 +90,7 @@ function makeCursorReactive(el, strength = 18) {
 makeCursorReactive(document.getElementById("hero-robot"));
 
 // ---- Registration countdown ----
-// TechWeek begins on September 21, 2026 (local browser time).
+
 const eventStart = new Date("2026-09-21T00:00:00");
 const countdownEls = {
   days: document.getElementById("count-days"),
@@ -102,7 +116,7 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ---- Registration form: client-side only, no backend/database ----
+// ---- Registration form
 const form = document.getElementById("register-form");
 const successOverlay = document.getElementById("register-success-overlay");
 const successMessage = document.getElementById("register-success-name");
